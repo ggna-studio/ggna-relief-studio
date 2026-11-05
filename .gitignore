@@ -1,0 +1,16 @@
+node_modules/
+dist-standalone/
+engine/
+data/
+work/
+release/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.zip
+*.7z
+*.exe
+*.safetensors
+*.pt
+*.key

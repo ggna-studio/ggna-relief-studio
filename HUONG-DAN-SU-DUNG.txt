@@ -1,0 +1,35 @@
+GGNA RELIEF STUDIO WEB 1.2 — BỘ ĐẦY ĐỦ CHO WINDOWS x64
+
+1. CHUẨN BỊ
+Bộ nén đã kèm giao diện GGNA, Python 3.13, ComfyUI, bốn bộ node và sáu tệp model. Không cần cài Node.js, npm, Electron hay Python riêng.
+Vẫn cần GPU NVIDIA và driver tương thích với PyTorch 2.12.0 + CUDA 13.0 đi kèm. RTX 3060 12 GB đã được kiểm chứng. Khuyến nghị RAM 32 GB, SSD local và tối thiểu 60 GB trống để giữ file tải về và giải nén. Ảnh lớn có thể cần GPU/RAM cao hơn.
+
+2. GIẢI NÉN
+Giải nén TOÀN BỘ file ZIP trước. Không chạy BAT ngay bên trong cửa sổ xem ZIP.
+Nên đặt ở đường dẫn ngắn, có quyền ghi, ví dụ D:\GGNA-Web hoặc C:\GGNA-Web. Tránh Program Files, thư mục chỉ đọc, ổ mạng hoặc thư mục Google Drive khi vận hành.
+ZIP lớn hơn 4 GB: cần ổ NTFS/exFAT; FAT32 không chứa được file này. Có thể giải nén bằng Windows Explorer hiện đại hoặc 7-Zip.
+
+3. KHỞI ĐỘNG
+Bấm đúp KHOI-DONG.bat. Trình duyệt mặc định tự mở giao diện web local.
+Mặc định giao diện ở http://127.0.0.1:4180/ và ComfyUI ở 127.0.0.1:8190. Chỉ lắng nghe trên máy này, không đưa GPU lên Internet.
+Nếu cổng web đã được dùng, launcher tự chọn cổng trống và mở đúng địa chỉ.
+ComfyUI tự khởi động từ thư mục engine trong bộ này. Chờ nhãn GPU máy này. Lần đầu có thể mất vài phút; không bấm tạo nhiều lần.
+Chỉ bản web và Python chạy; không kèm trình duyệt Chromium riêng như EXE.
+
+4. TẠO VÀ XUẤT RELIEF
+Tải ảnh màu. Chọn Thử nhanh cho lần đầu rồi bấm Tạo relief bằng GPU.
+Trắng là cao nhất, đen là thấp nhất. Sau khi nhận kết quả, kiểm tra và chỉnh mức xám/làm mịn; xuất PNG grayscale 16-bit hoặc BMP 8-bit.
+Xem 3D là preview rút gọn. Xuất nguồn 8-bit sang 16-bit không tự tạo thêm thông tin độ sâu. Duyệt file trước sản xuất.
+Mẫu có sẵn là heightmap hình học được tạo bằng công thức, không phải đầu ra của model. Dùng mẫu để kiểm tra chỉnh mức xám, xem 3D và xuất file.
+Chưa hứa tốc độ hay mức VRAM cho preset ảnh lớn; bắt đầu bằng ảnh nhỏ để kiểm tra máy.
+
+5. DỪNG VÀ DỮ LIỆU
+Đóng tab trình duyệt không dừng GPU. Khi dùng xong, bấm DUNG_TOOL.bat để dừng web và GPU do phiên này mở. Tác vụ ảnh đang chạy sẽ dừng.
+Ảnh input/output, log và khóa tác vụ nằm trong thư mục data của bộ đã giải nén. Không gửi thư mục data cho người khác vì chứa ảnh và khóa riêng của phiên dùng.
+Nếu có lỗi, xem data/logs/web.log và data/logs/comfy-stderr.log. Kiểm tra đủ dung lượng, model đã giải nén và driver NVIDIA trước khi khởi động lại.
+Ứng dụng không tự tải thêm model, cập nhật node hoặc gửi ảnh tới cloud. Không dùng credit cloud. Kết nối Internet không thay thế được GPU local.
+
+6. GIẤY PHÉP
+Giấy phép ComfyUI và các thư viện được giữ trong mã nguồn/package metadata. Mô hình FLUX.1 Kontext Dev có giấy phép riêng được kèm tại licenses/FLUX-1-dev-LICENSE.md và NOTICE.txt.
+Việc đóng gói không cấp thêm quyền thương mại/phân phối model. Trước khi phát hành cho khách hoặc vận hành thương mại, bên phân phối cần có quyền phù hợp cho FLUX và LoRA/upscaler từ chủ sở hữu.
+Bộ kỹ thuật này không phải sản phẩm được Black Forest Labs bảo trợ hoặc xác nhận.

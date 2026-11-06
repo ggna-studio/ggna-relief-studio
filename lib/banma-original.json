@@ -1,0 +1,465 @@
+{
+  "1": {
+    "inputs": {
+      "image_a": [
+        "23",
+        0
+      ],
+      "image_b": [
+        "34:149",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "23": {
+    "inputs": {
+      "image": "3.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    },
+    "is_changed": [
+      "017a6fa02561c60eef6d4e9472d6b1d916de1e7424cb18d56f928bace0dc4050"
+    ]
+  },
+  "34:29": {
+    "inputs": {
+      "lora_name": "\u6591\u9a6c\u6570\u5b57\u79d1\u6280_Lora.safetensors",
+      "strength_model": 1.0000000000000002,
+      "model": [
+        "34:11",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "34:11": {
+    "inputs": {
+      "unet_name": "flux1-dev-kontext_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "34:27": {
+    "inputs": {
+      "size": 2,
+      "sigma_color": 4.0,
+      "sigma_space": 0.4,
+      "images": [
+        "34:5",
+        0
+      ]
+    },
+    "class_type": "BilateralFilterImage",
+    "_meta": {
+      "title": "Bilateral Filter Image"
+    }
+  },
+  "34:2": {
+    "inputs": {
+      "samples": [
+        "34:28",
+        0
+      ],
+      "vae": [
+        "34:21",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "34:152": {
+    "inputs": {
+      "model_name": "BANMAsharp_V3.pt"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "34:3": {
+    "inputs": {
+      "upscale_model": [
+        "34:152",
+        0
+      ],
+      "image": [
+        "34:27",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "34:6": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "longest",
+      "scale_to_length": 2048,
+      "background_color": "#000000",
+      "image": [
+        "34:3",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "LayerUtility: ImageScaleByAspectRatio V2"
+    }
+  },
+  "34:5": {
+    "inputs": {
+      "diameter": 3,
+      "sigma_color": 2.0,
+      "sigma_space": 2.0,
+      "image": [
+        "34:2",
+        0
+      ]
+    },
+    "class_type": "Image Median Filter",
+    "_meta": {
+      "title": "Image Median Filter"
+    }
+  },
+  "34:7": {
+    "inputs": {
+      "size": 7,
+      "sigma_color": 80.0,
+      "sigma_space": 10.0,
+      "images": [
+        "34:3",
+        0
+      ]
+    },
+    "class_type": "BilateralFilterImage",
+    "_meta": {
+      "title": "Bilateral Filter Image"
+    }
+  },
+  "34:26": {
+    "inputs": {
+      "sharpen_radius": 3,
+      "sigma": 0.8,
+      "alpha": 1.2,
+      "image": [
+        "34:7",
+        0
+      ]
+    },
+    "class_type": "ImageSharpen",
+    "_meta": {
+      "title": "Sharpen Image"
+    }
+  },
+  "34:8": {
+    "inputs": {
+      "factor": 1.3,
+      "images": [
+        "34:26",
+        0
+      ]
+    },
+    "class_type": "BatchNormalizeImage",
+    "_meta": {
+      "title": "Batch Normalize (Image)"
+    }
+  },
+  "34:12": {
+    "inputs": {
+      "guidance": 0.73,
+      "conditioning": [
+        "34:15",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "FluxGuidance"
+    }
+  },
+  "34:13": {
+    "inputs": {
+      "conditioning": [
+        "34:16",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "ConditioningZeroOut"
+    }
+  },
+  "34:14": {
+    "inputs": {
+      "width": [
+        "34:17",
+        0
+      ],
+      "height": [
+        "34:17",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "34:149": {
+    "inputs": {
+      "size": 8,
+      "sigma_color": 15.0,
+      "sigma_space": 2.0,
+      "images": [
+        "34:8",
+        0
+      ]
+    },
+    "class_type": "BilateralFilterImage",
+    "_meta": {
+      "title": "Bilateral Filter Image"
+    }
+  },
+  "34:15": {
+    "inputs": {
+      "conditioning": [
+        "34:16",
+        0
+      ],
+      "latent": [
+        "34:20",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "ReferenceLatent"
+    }
+  },
+  "34:16": {
+    "inputs": {
+      "text": [
+        "34:22",
+        0
+      ],
+      "clip": [
+        "34:18",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "34:21": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "34:20": {
+    "inputs": {
+      "pixels": [
+        "34:179",
+        0
+      ],
+      "vae": [
+        "34:21",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "34:18": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "DualCLIPLoader"
+    }
+  },
+  "34:22": {
+    "inputs": {
+      "text": "Convert to grayscale image with a black background.\nHigh-definition black background blended with grayscale image, no noise, no mottled black and white excessively soft"
+    },
+    "class_type": "Text Multiline",
+    "_meta": {
+      "title": "Text Multiline"
+    }
+  },
+  "34:17": {
+    "inputs": {
+      "image": [
+        "34:179",
+        0
+      ]
+    },
+    "class_type": "easy imageSize",
+    "_meta": {
+      "title": "ImageSize"
+    }
+  },
+  "34:180": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "scale_by": 1.0,
+      "image": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "34:181": {
+    "inputs": {
+      "image": [
+        "34:180",
+        0
+      ]
+    },
+    "class_type": "easy imageSize",
+    "_meta": {
+      "title": "ImageSize"
+    }
+  },
+  "34:179": {
+    "inputs": {
+      "width": [
+        "34:181",
+        0
+      ],
+      "height": [
+        "34:181",
+        1
+      ],
+      "interpolation": "lanczos",
+      "method": "keep proportion",
+      "condition": "always",
+      "multiple_of": 16,
+      "image": [
+        "34:180",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "\ud83d\udd27 Image Resize"
+    }
+  },
+  "34:172": {
+    "inputs": {
+      "filename_prefix": "Jingdiao_bmp",
+      "invert_colors": false,
+      "flip_vertical": false,
+      "images": [
+        "34:149",
+        0
+      ]
+    },
+    "class_type": "ImageToJingdiaoBMP",
+    "_meta": {
+      "title": "\u8f6c\u6362\u7cbe\u96d58\u4f4d\u7070\u5ea6BMP (Convert to Jingdiao BMP)"
+    }
+  },
+  "34:9": {
+    "inputs": {
+      "filename_prefix": "banma.exr",
+      "precision": "float",
+      "compression": "zip",
+      "input_colorspace": "Raw",
+      "output_colorspace": "Raw",
+      "frame_start": 1,
+      "frame_pad": 4,
+      "dwa_compression_level": 45.0,
+      "save_preview": false,
+      "images": [
+        "34:149",
+        0
+      ]
+    },
+    "class_type": "OIIO_SaveImage",
+    "_meta": {
+      "title": "Save Image (OIIO)"
+    }
+  },
+  "34:10": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "34:149",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "34:28": {
+    "inputs": {
+      "seed": 408416742087713,
+      "steps": 24,
+      "cfg": 1.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 1.0,
+      "model": [
+        "34:29",
+        0
+      ],
+      "positive": [
+        "34:12",
+        0
+      ],
+      "negative": [
+        "34:13",
+        0
+      ],
+      "latent_image": [
+        "34:14",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  }
+}
